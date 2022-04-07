@@ -5,10 +5,18 @@ import { useState } from "react";
 // =================
 import { XIcon, OIcon } from "../constants/icons";
 
-const Square = ({ current, position, squares, setCurrent, setInPosition }) => {
+const Square = ({
+  current,
+  position,
+  squares,
+  setCurrent,
+  setInPosition,
+  theWinner,
+}) => {
   const [onSquare, setOnSquare] = useState(false);
+
   const onClickHandler = () => {
-    if (!squares[position]) {
+    if (!squares[position] && !theWinner) {
       const newSquares = [...squares];
 
       // Insert new play
@@ -25,16 +33,16 @@ const Square = ({ current, position, squares, setCurrent, setInPosition }) => {
     <div
       className={`bg-slate-200 dark:bg-slate-700 ${
         !squares[position] ? "cursor-pointer" : ""
-      } w-1/3 h-36 p-7 rounded-md`}
+      } md:w-32 md:h-32 w-20 h-20 lg:p-7 p-4 rounded-md`}
       onMouseEnter={() => setOnSquare(true)}
       onMouseLeave={() => setOnSquare(false)}
       onClick={onClickHandler}
     >
-      {(onSquare && current === "X" && !squares[position]) ||
+      {(onSquare && current === "X" && !squares[position] && !theWinner) ||
       squares[position] === "X"
         ? XIcon("fill-amber-600", "dark:fill-amber-400")
         : ""}
-      {(onSquare && current === "O" && !squares[position]) ||
+      {(onSquare && current === "O" && !squares[position] && !theWinner) ||
       squares[position] === "O"
         ? OIcon("fill-cyan-600", "dark:fill-cyan-400")
         : ""}

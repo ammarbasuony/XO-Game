@@ -7,7 +7,6 @@ const DarkModeBtn = () => {
   const toggleDarkMode = (e) => {
     e.preventDefault();
     const isDarkMode = localStorage.getItem("darkMode");
-    console.log(isDarkMode);
 
     if (isDarkMode === "") {
       localStorage.setItem("darkMode", "true");
@@ -25,7 +24,7 @@ const DarkModeBtn = () => {
       className="font-poppins flex items-center px-4 py-2 ml-3 bg-slate-400 dark:bg-slate-900 rounded-2xl"
     >
       {darkModeIcon("fill-slate-50", "fill-slate-50")}{" "}
-      <span className="ml-1 text-slate-50">Dark Mode</span>
+      <span className="ml-1 text-slate-50">Dark</span>
     </a>
   );
 };
