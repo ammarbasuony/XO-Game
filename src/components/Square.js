@@ -12,11 +12,23 @@ const Square = ({
   setCurrent,
   setInPosition,
   theWinner,
+  online,
+  socket,
+  roomId,
+  firstPlay,
+  setFirstPlay,
 }) => {
   const [onSquare, setOnSquare] = useState(false);
-
   const onClickHandler = () => {
-    if (!squares[position] && !theWinner) {
+    if (!firstPlay && online) {
+      setFirstPlay(current);
+    }
+
+    if (
+      !squares[position] &&
+      !theWinner &&
+      (firstPlay === current || firstPlay === "")
+    ) {
       const newSquares = [...squares];
 
       // Insert new play
@@ -26,6 +38,14 @@ const Square = ({
       // Change the current player
       if (current === "X") setCurrent("O");
       else setCurrent("X");
+
+      if (online) {
+        socket.emit("play_game", {
+          squares: newSquares,
+          roomId,
+          current: current === "X" ? "O" : "X",
+        });
+      }
     }
   };
 
@@ -38,11 +58,19 @@ const Square = ({
       onMouseLeave={() => setOnSquare(false)}
       onClick={onClickHandler}
     >
-      {(onSquare && current === "X" && !squares[position] && !theWinner) ||
+      {(onSquare &&
+        current === "X" &&
+        !squares[position] &&
+        !theWinner &&
+        (firstPlay === current || firstPlay === "")) ||
       squares[position] === "X"
         ? XIcon("fill-amber-600", "dark:fill-amber-400")
         : ""}
-      {(onSquare && current === "O" && !squares[position] && !theWinner) ||
+      {(onSquare &&
+        current === "O" &&
+        !squares[position] &&
+        !theWinner &&
+        (firstPlay === current || firstPlay === "")) ||
       squares[position] === "O"
         ? OIcon("fill-cyan-600", "dark:fill-cyan-400")
         : ""}

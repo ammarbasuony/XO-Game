@@ -1,40 +1,100 @@
 import { useEffect, useState } from "react";
+import io from "socket.io-client";
 
 // =================
 //  Components
 // =================
-import DarkModeBtn from "./components/DarkModeBtn";
-import NewGame from "./components/NewGame";
-import Palette from "./components/Palette";
+import HomePage from "./components/HomePage";
+import NewRoom from "./components/NewRoom";
+import JoinRoom from "./components/JoinRoom";
+import Offline from "./components/Offline";
+
+// Establish Socket Connection
+const socket = io.connect(process.env.REACT_APP_BACKEND_URL);
 
 const Main = () => {
   const [squares, setSquares] = useState(new Array(9).fill(""));
+  const [current, setCurrent] = useState("X");
   const [theWinner, setTheWinner] = useState("");
+  const [status, setStatus] = useState("");
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [sessionEnded, setSessionEnded] = useState(false);
 
   useEffect(() => {
     const isDarkMode = localStorage.getItem("darkMode");
     if (isDarkMode === "true") document.documentElement.classList.add("dark");
   }, []);
 
+  useEffect(() => {
+    socket.on("reset", () => {
+      setTheWinner("");
+    });
+
+    socket.on("player_joined", (userIds) => {
+      console.log(userIds);
+      setOnlineUsers([...onlineUsers, ...userIds]);
+    });
+
+    socket.on("player_left", (userId) => {
+      console.log(userId);
+      setOnlineUsers(onlineUsers.filter((user) => user !== userId));
+      setStatus("");
+    });
+
+    socket.on("room_closed", () => {
+      console.log("Closed");
+      setOnlineUsers([]);
+      setStatus("");
+      setSessionEnded(true);
+    });
+  }, [socket]);
+
   return (
     <div className="bg-slate-300 min-h-screen flex justify-center items-center dark:bg-slate-800">
-      <div>
-        <div className="flex justify-between items-center md:flex-row lg:flex-row flex-col">
-          <h3 className="font-poppins font-bold text-slate-800 text-2xl dark:text-slate-50 lg:m-0 md:m-0 mb-3">
-            XO Game
-          </h3>
-          <div className="flex">
-            <NewGame setTheWinner={setTheWinner} setSquares={setSquares} />
-            <DarkModeBtn />
-          </div>
-        </div>
-        <Palette
-          squares={squares}
+      {status === "offline" ? (
+        <Offline
           setSquares={setSquares}
-          theWinner={theWinner}
           setTheWinner={setTheWinner}
+          setStatus={setStatus}
+          squares={squares}
+          theWinner={theWinner}
+          current={current}
+          setCurrent={setCurrent}
         />
-      </div>
+      ) : status === "join" ? (
+        <JoinRoom
+          setSquares={setSquares}
+          setTheWinner={setTheWinner}
+          setStatus={setStatus}
+          squares={squares}
+          theWinner={theWinner}
+          socket={socket}
+          current={current}
+          setCurrent={setCurrent}
+          onlineUsers={onlineUsers}
+          setOnlineUsers={setOnlineUsers}
+        />
+      ) : status === "new" ? (
+        <NewRoom
+          setSquares={setSquares}
+          setTheWinner={setTheWinner}
+          setStatus={setStatus}
+          squares={squares}
+          theWinner={theWinner}
+          socket={socket}
+          current={current}
+          setCurrent={setCurrent}
+          onlineUsers={onlineUsers}
+          setOnlineUsers={setOnlineUsers}
+        />
+      ) : (
+        <HomePage
+          setStatus={setStatus}
+          setCurrent={setCurrent}
+          sessionEnded={sessionEnded}
+          setSessionEnded={setSessionEnded}
+        />
+      )}
     </div>
   );
 };

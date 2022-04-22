@@ -5,9 +5,18 @@ import { useEffect, useState } from "react";
 // =================
 import Square from "./Square";
 
-const Palette = ({ squares, setSquares, theWinner, setTheWinner }) => {
-  const [current, setCurrent] = useState("X");
-
+const Palette = ({
+  squares,
+  setSquares,
+  theWinner,
+  setTheWinner,
+  current,
+  setCurrent,
+  socket,
+  roomId,
+  online,
+}) => {
+  const [firstPlay, setFirstPlay] = useState("");
   const checkTheWinner = () => {
     if (theWinner === "") {
       // Check Columns
@@ -86,6 +95,15 @@ const Palette = ({ squares, setSquares, theWinner, setTheWinner }) => {
     }
   }, [squares]);
 
+  useEffect(() => {
+    if (online) {
+      socket.on("current_state", ({ palette, current }) => {
+        setSquares(palette);
+        setCurrent(current);
+      });
+    }
+  }, [socket]);
+
   return (
     <div className="mt-5">
       <div className="flex gap-2 mb-3">
@@ -96,6 +114,11 @@ const Palette = ({ squares, setSquares, theWinner, setTheWinner }) => {
           setCurrent={setCurrent}
           setInPosition={setSquares}
           theWinner={theWinner}
+          online={online}
+          socket={socket}
+          roomId={roomId}
+          firstPlay={firstPlay}
+          setFirstPlay={setFirstPlay}
         />
         <Square
           current={current}
@@ -104,6 +127,11 @@ const Palette = ({ squares, setSquares, theWinner, setTheWinner }) => {
           setCurrent={setCurrent}
           setInPosition={setSquares}
           theWinner={theWinner}
+          online={online}
+          socket={socket}
+          roomId={roomId}
+          firstPlay={firstPlay}
+          setFirstPlay={setFirstPlay}
         />
         <Square
           current={current}
@@ -112,6 +140,11 @@ const Palette = ({ squares, setSquares, theWinner, setTheWinner }) => {
           setCurrent={setCurrent}
           setInPosition={setSquares}
           theWinner={theWinner}
+          online={online}
+          socket={socket}
+          roomId={roomId}
+          firstPlay={firstPlay}
+          setFirstPlay={setFirstPlay}
         />
       </div>
       <div className="flex gap-2 mb-3">
@@ -122,6 +155,11 @@ const Palette = ({ squares, setSquares, theWinner, setTheWinner }) => {
           setCurrent={setCurrent}
           setInPosition={setSquares}
           theWinner={theWinner}
+          online={online}
+          socket={socket}
+          roomId={roomId}
+          firstPlay={firstPlay}
+          setFirstPlay={setFirstPlay}
         />
         <Square
           current={current}
@@ -130,6 +168,11 @@ const Palette = ({ squares, setSquares, theWinner, setTheWinner }) => {
           setCurrent={setCurrent}
           setInPosition={setSquares}
           theWinner={theWinner}
+          online={online}
+          socket={socket}
+          roomId={roomId}
+          firstPlay={firstPlay}
+          setFirstPlay={setFirstPlay}
         />
         <Square
           current={current}
@@ -138,6 +181,11 @@ const Palette = ({ squares, setSquares, theWinner, setTheWinner }) => {
           setCurrent={setCurrent}
           setInPosition={setSquares}
           theWinner={theWinner}
+          online={online}
+          socket={socket}
+          roomId={roomId}
+          firstPlay={firstPlay}
+          setFirstPlay={setFirstPlay}
         />
       </div>
       <div className="flex gap-2">
@@ -148,6 +196,11 @@ const Palette = ({ squares, setSquares, theWinner, setTheWinner }) => {
           setCurrent={setCurrent}
           setInPosition={setSquares}
           theWinner={theWinner}
+          online={online}
+          socket={socket}
+          roomId={roomId}
+          firstPlay={firstPlay}
+          setFirstPlay={setFirstPlay}
         />
         <Square
           current={current}
@@ -156,6 +209,11 @@ const Palette = ({ squares, setSquares, theWinner, setTheWinner }) => {
           setCurrent={setCurrent}
           setInPosition={setSquares}
           theWinner={theWinner}
+          online={online}
+          socket={socket}
+          roomId={roomId}
+          firstPlay={firstPlay}
+          setFirstPlay={setFirstPlay}
         />
         <Square
           current={current}
@@ -164,6 +222,11 @@ const Palette = ({ squares, setSquares, theWinner, setTheWinner }) => {
           setCurrent={setCurrent}
           setInPosition={setSquares}
           theWinner={theWinner}
+          online={online}
+          socket={socket}
+          roomId={roomId}
+          firstPlay={firstPlay}
+          setFirstPlay={setFirstPlay}
         />
       </div>
       {theWinner && (
