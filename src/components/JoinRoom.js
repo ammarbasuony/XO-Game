@@ -43,7 +43,7 @@ const JoinRoom = ({
     <div>
       {roomId ? (
         <div className="join-room-game">
-          <div className="text-slate-50 text-center mb-2 flex items-center justify-center font-poppins">
+          <div className="text-slate-800 dark:text-slate-50 text-center mb-2 flex items-center justify-center font-poppins">
             <div
               className={`w-2 h-2 rounded-full ${
                 onlineUsers.length > 1 ? "bg-green-500" : "bg-red-500"
@@ -53,7 +53,7 @@ const JoinRoom = ({
               ? "Player Two is in the room"
               : "No one in the room"}
           </div>
-          <div className="flex-1 p-3 text-center font-poppins text-slate-50 mb-5 border-2  border-slate-50 rounded-lg">
+          <div className="flex-1 p-3 text-center font-poppins text-slate-800 dark:text-slate-50 mb-5 border-2 border-slate-800 dark:border-slate-50 rounded-lg">
             <span className="font-bold">Room ID:</span> {roomId}
           </div>
           <button
@@ -94,7 +94,7 @@ const JoinRoom = ({
             &larr; Go Back
           </button>
           <form onSubmit={(e) => enterRoomId(e)}>
-            <h1 className="text-slate-50 font-poppins text-center mb-5 text-3xl font">
+            <h1 className="text-slate-800 dark:text-slate-50 font-poppins text-center mb-5 text-3xl font">
               Enter Room ID
             </h1>
             <input

@@ -12,7 +12,7 @@ const HomePage = ({ setStatus, setCurrent, sessionEnded, setSessionEnded }) => {
 
       <div className="flex flex-col mt-14 justify-center gap-5 px-20">
         {sessionEnded && (
-          <div className="text-center font-poppins text-yellow-500">
+          <div className="text-center font-poppins dark:text-yellow-500 text-yellow-600">
             Session Ended
           </div>
         )}

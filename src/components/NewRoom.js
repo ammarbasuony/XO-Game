@@ -48,7 +48,7 @@ const NewRoom = ({
 
   return (
     <div className="new-room-game">
-      <div className="text-slate-50 text-center mb-2 flex items-center justify-center font-poppins">
+      <div className="text-slate-800 dark:text-slate-50 text-center mb-2 flex items-center justify-center font-poppins">
         <div
           className={`w-2 h-2 rounded-full ${
             onlineUsers.length > 1 ? "bg-green-500" : "bg-red-500"
@@ -58,7 +58,7 @@ const NewRoom = ({
           ? "Player Two is in the room"
           : "No one in the room"}
       </div>
-      <div className="flex-1 p-3 text-center font-poppins text-slate-50 mb-5 border-2  border-slate-50 rounded-lg">
+      <div className="flex-1 p-3 text-center font-poppins text-slate-800 dark:text-slate-50 mb-5 border-2 border-slate-800 dark:border-slate-50 rounded-lg">
         <span className="font-bold">Room ID:</span> {roomId}
       </div>
       <button
