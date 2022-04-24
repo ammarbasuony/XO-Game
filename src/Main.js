@@ -19,6 +19,7 @@ const Main = () => {
   const [status, setStatus] = useState("");
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sessionEnded, setSessionEnded] = useState(false);
+  const [firstPlay, setFirstPlay] = useState("");
 
   useEffect(() => {
     const isDarkMode = localStorage.getItem("darkMode");
@@ -39,6 +40,7 @@ const Main = () => {
       console.log(userId);
       setOnlineUsers(onlineUsers.filter((user) => user !== userId));
       setStatus("");
+      setSessionEnded(true);
     });
 
     socket.on("room_closed", () => {
@@ -60,6 +62,8 @@ const Main = () => {
           theWinner={theWinner}
           current={current}
           setCurrent={setCurrent}
+          firstPlay={firstPlay}
+          setFirstPlay={setFirstPlay}
         />
       ) : status === "join" ? (
         <JoinRoom
@@ -73,6 +77,8 @@ const Main = () => {
           setCurrent={setCurrent}
           onlineUsers={onlineUsers}
           setOnlineUsers={setOnlineUsers}
+          firstPlay={firstPlay}
+          setFirstPlay={setFirstPlay}
         />
       ) : status === "new" ? (
         <NewRoom
@@ -86,6 +92,8 @@ const Main = () => {
           setCurrent={setCurrent}
           onlineUsers={onlineUsers}
           setOnlineUsers={setOnlineUsers}
+          firstPlay={firstPlay}
+          setFirstPlay={setFirstPlay}
         />
       ) : (
         <HomePage

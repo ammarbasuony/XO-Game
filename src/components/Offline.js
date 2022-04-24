@@ -13,6 +13,8 @@ const Offline = ({
   theWinner,
   current,
   setCurrent,
+  firstPlay,
+  setFirstPlay,
 }) => {
   const reset = () => {
     setStatus("");
@@ -30,7 +32,12 @@ const Offline = ({
       </button>
       <div className="flex justify-between items-center md:flex-row lg:flex-row flex-col">
         <div className="flex">
-          <NewGame setTheWinner={setTheWinner} setSquares={setSquares} />
+          <NewGame
+            setTheWinner={setTheWinner}
+            setSquares={setSquares}
+            setCurrent={setCurrent}
+            setFirstPlay={setFirstPlay}
+          />
           <DarkModeBtn />
         </div>
       </div>
@@ -41,6 +48,8 @@ const Offline = ({
         setTheWinner={setTheWinner}
         current={current}
         setCurrent={setCurrent}
+        firstPlay={firstPlay}
+        setFirstPlay={setFirstPlay}
       />
     </div>
   );

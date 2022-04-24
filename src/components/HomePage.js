@@ -3,14 +3,14 @@ import { useState } from "react";
 const HomePage = ({ setStatus, setCurrent, sessionEnded, setSessionEnded }) => {
   return (
     <div>
-      <h3 className="font-poppins lg:leading-none leading-loose text-center font-bold text-3xl text-slate-800 dark:text-slate-50">
+      <h3 className="font-poppins lg:leading-none leading-loose text-center font-bold lg:text-3xl text-2xl text-slate-800 dark:text-slate-50">
         Welcome To Ammar Yaser{" "}
-        <span className="bg-cyan-700 dark:bg-cyan-600 font-normal p-2 ml-2 rounded-lg text-slate-50">
+        <span className="bg-cyan-700 dark:bg-cyan-600 text-slate-50 font-normal md:p-2 md:m-0 md:ml-2 rounded-lg md:inline block mt-2 mx-4">
           XO Game
         </span>
       </h3>
 
-      <div className="flex flex-col mt-14 justify-center gap-5 px-20">
+      <div className="flex flex-col mt-14 justify-center gap-5 md:px-20">
         {sessionEnded && (
           <div className="text-center font-poppins text-yellow-500">
             Session Ended

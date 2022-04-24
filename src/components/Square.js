@@ -1,3 +1,4 @@
+import { isMobile } from "react-device-detect";
 import { useState } from "react";
 
 // =================
@@ -54,8 +55,8 @@ const Square = ({
       className={`bg-slate-200 dark:bg-slate-700 ${
         !squares[position] ? "cursor-pointer" : ""
       } md:w-32 md:h-32 w-20 h-20 lg:p-7 p-4 rounded-md`}
-      onMouseEnter={() => setOnSquare(true)}
-      onMouseLeave={() => setOnSquare(false)}
+      onMouseEnter={!isMobile ? () => setOnSquare(true) : null}
+      onMouseLeave={!isMobile ? () => setOnSquare(false) : null}
       onClick={onClickHandler}
     >
       {(onSquare &&

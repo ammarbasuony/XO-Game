@@ -15,8 +15,9 @@ const Palette = ({
   socket,
   roomId,
   online,
+  firstPlay,
+  setFirstPlay
 }) => {
-  const [firstPlay, setFirstPlay] = useState("");
   const checkTheWinner = () => {
     if (theWinner === "") {
       // Check Columns
@@ -97,9 +98,13 @@ const Palette = ({
 
   useEffect(() => {
     if (online) {
-      socket.on("current_state", ({ palette, current }) => {
-        setSquares(palette);
-        setCurrent(current);
+      socket.on("current_state", (data) => {
+        setSquares(data.palette);
+        setCurrent(data.current);
+
+        if (data.firstPlay === "") {
+          setFirstPlay("");
+        }
       });
     }
   }, [socket]);

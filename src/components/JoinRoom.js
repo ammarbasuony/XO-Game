@@ -17,7 +17,9 @@ const JoinRoom = ({
   current,
   setCurrent,
   onlineUsers,
-  setOnlineUsers
+  setOnlineUsers,
+  firstPlay,
+  setFirstPlay,
 }) => {
   const [roomId, setRoomId] = useState(0);
   const [enteredRoomId, setEnteredRoomId] = useState(0);
@@ -69,6 +71,9 @@ const JoinRoom = ({
                 setSquares={setSquares}
                 socket={socket}
                 roomId={roomId}
+                setCurrent={setCurrent}
+                setFirstPlay={setFirstPlay}
+                online={true}
               />
               <DarkModeBtn />
             </div>
@@ -83,10 +88,12 @@ const JoinRoom = ({
             socket={socket}
             roomId={roomId}
             online={true}
+            firstPlay={firstPlay}
+            setFirstPlay={setFirstPlay}
           />
         </div>
       ) : (
-        <div>
+        <div className="md:m-0 mx-5">
           <button
             onClick={reset}
             className="mb-3 font-poppins text-slate-800 dark:text-slate-50"

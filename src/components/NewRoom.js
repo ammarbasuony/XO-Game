@@ -17,7 +17,9 @@ const NewRoom = ({
   current,
   setCurrent,
   onlineUsers,
-  setOnlineUsers
+  setOnlineUsers,
+  firstPlay,
+  setFirstPlay,
 }) => {
   const [roomId, setRoomId] = useState(0);
 
@@ -74,6 +76,9 @@ const NewRoom = ({
             setSquares={setSquares}
             socket={socket}
             roomId={roomId}
+            setCurrent={setCurrent}
+            setFirstPlay={setFirstPlay}
+            online={true}
           />
           <DarkModeBtn />
         </div>
@@ -88,6 +93,8 @@ const NewRoom = ({
         socket={socket}
         roomId={roomId}
         online={true}
+        firstPlay={firstPlay}
+        setFirstPlay={setFirstPlay}
       />
     </div>
   );

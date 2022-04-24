@@ -3,17 +3,30 @@
 // =================
 import { resetIcon } from "../constants/icons";
 
-const NewGame = ({ setSquares, setTheWinner, socket, roomId }) => {
+const NewGame = ({
+  setSquares,
+  setTheWinner,
+  socket,
+  roomId,
+  setCurrent,
+  setFirstPlay,
+  online,
+}) => {
   const setNewGame = (e) => {
     e.preventDefault();
     setSquares(new Array(9).fill(""));
     setTheWinner("");
+    setCurrent("X");
+    setFirstPlay("");
 
-    socket.emit("new_game", {
-      palette: new Array(9).fill(""),
-      current: "X",
-      roomId,
-    });
+    if (online) {
+      socket.emit("new_game", {
+        palette: new Array(9).fill(""),
+        current: "X",
+        firstPlay: "",
+        roomId,
+      });
+    }
   };
 
   return (
