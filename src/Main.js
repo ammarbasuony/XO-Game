@@ -41,6 +41,7 @@ const Main = () => {
       setOnlineUsers(onlineUsers.filter((user) => user !== userId));
       setStatus("");
       setSessionEnded(true);
+      setSquares(new Array(9).fill(""))
     });
 
     socket.on("room_closed", () => {
@@ -48,6 +49,7 @@ const Main = () => {
       setOnlineUsers([]);
       setStatus("");
       setSessionEnded(true);
+      setSquares(new Array(9).fill(""))
     });
   }, [socket]);
 
