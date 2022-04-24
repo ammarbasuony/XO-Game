@@ -30,6 +30,7 @@ const JoinRoom = ({
     setTheWinner("");
     socket.emit("close_room");
     setOnlineUsers([]);
+    setFirstPlay("");
   };
 
   const enterRoomId = (e) => {

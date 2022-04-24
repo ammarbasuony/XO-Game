@@ -29,6 +29,7 @@ const NewRoom = ({
     setTheWinner("");
     socket.emit("close_room");
     setOnlineUsers([]);
+    setFirstPlay("");
   };
 
   const generateRoomCode = (min, max) => {
